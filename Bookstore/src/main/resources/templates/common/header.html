@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="common-header">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<title th:text="#{label.title}"></title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+<link href="/css/non-responsive.css" rel="stylesheet" />
+
+<!-- data table -->
+<link th:href="@{/css/jquery.dataTables.min.css}" rel="stylesheet" />
+<link th:href="@{/css/dataTables.bootstrap.min.css}" rel="stylesheet" />
+
+<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="/css/style.css" rel="stylesheet" />
+
+<link rel="icon" href="/image/applie-touch-icon.png" />
+</head>
+
+<body>
+	<div th:fragment="navbar">
+		<div class="page-top"
+			style="	width: 100%; height: 20px; background-color: #f46b42;"></div>
+		<!-- Static navbar -->
+		<nav class="navbar navbar-default navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" th:href="@{/}" th:text="#{label.title}"></a>
+				</div>
+				<div id="navbar">
+					<ul class="nav navbar-nav navbar-left">
+						<li class="dropdown"><a th:href="@{/bookshelf}"
+							class="dropdown-toggle" data-toggle="dropdown" role="button"
+							aria-haspopup="true" aria-expanded="false" th:text="#{label.books}"><span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a th:href="@{/bookshelf}" th:text="#{label.bookshelf}"></a></li>
+								<li><a th:href="@{/hours}" th:text="#{label.direction}"></a></li>
+								<li><a th:href="@{/faq}" th:text="#{label.faq}"></a></li>
+
+							</ul></li>
+						<form class="navbar-form" th:action="@{/searchBook}" method="post">
+							<div class="form-group">
+								<input type="text" name="keyword" class="form-control"
+									placeholder="Book title" />
+							</div>
+							<button type="submit" class="btn btn-default" th:text="#{label.search}"></button>
+						</form>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a th:href="@{/bookshelf}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+												aria-haspopup="true" aria-expanded="false" th:text="#{label.lang}"><span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a th:href="@{'?lang=en'}">ENG</a></li>
+							<li><a th:href="@{'?lang=ru'}">RUS</a></li>
+						</ul></li>
+						<li><a th:href="@{/shoppingCart/cart}" th:text="#{label.cart}"></a></li>
+						<li><a sec:authorize="isAnonymous()" th:href="@{/login}" th:text="#{label.myacc}"></a></li>
+						<li><a sec:authorize="isAuthenticated()"
+							th:href="@{/myProfile}" th:text="#{label.myacc}">MY ACCOUNT</a></li>
+						<li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" th:text="#{label.exit}"></a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
+	</div>
+
+	<div th:fragment="footer">
+		<br />
+		<br />
+		<footer>
+			<div class="row">
+				<div class="col-xs-3 footerleft">
+					<div class="logofooter">
+						<a th:href="@{/}"><img class="img-responsive"
+							src="/image/logo.png" style="width: 200px;" /></a>
+					</div>
+					<p th:text="#{label.info}">
+
+					</p>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7" th:text="#{label.contact}" ></h6>
+					<ul class="post">
+						<p >
+							<i class="fa fa-map-pin" ></i> Bayzakova, 280<br /> Almaty, KZ
+							050000
+						</p>
+						<p>
+							<i class="fa fa-phone"></i> Phone (KZ) : +7 776 374 78 75
+						</p>
+						<p>
+							<i class="fa fa-envelope"></i> E-mail : beknazarserikbaev@gmail.com
+						</p>
+					</ul>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7" th:text="#{label.links}"></h6>
+					<ul class="footer-ul">
+						<li><a href="#"> Privacy Policy</a></li>
+						<li><a href="#"> Terms &#38; Conditions</a></li>
+						<li><a href="/faq" th:text="#{label.faq}"></a></li>
+					</ul>
+				</div>
+				<div class="col-xs-3 paddingtop-bottom">
+					<h6 class="heading7" th:text="#{label.direction}"></h6>
+					<div class="post">
+						<p>Monday - Saturday: 9am - 11pm</p>
+						<p>Sunday: 10am - 10pm</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<div class="copyright">
+			<div class="col-md-6">
+				<p>© 2020 - All Rights Reserved</p>
+			</div>
+			<div class="col-md-6">
+				<ul class="bottom_ul">
+					<li><a href="https://www.instagram.com/truebook24/" th:text="#{label.about}"></a></li>
+					<li><a href="https://www.instagram.com/truebook24/"  th:text="#{label.blog}"></a></li>
+					<li><a href="/faq"  th:text="#{label.faq}"></a></li>
+					<li><a href="https://www.instagram.com/truebook24/"  th:text="#{label.contact}"></a></li>
+					<li><a href="/hours"  th:text="#{label.direction}">Site Map</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div th:fragment="body-bottom-scripts">
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+
+		<script th:src="@{/js/scripts.js}"></script>
+
+		<!-- data table -->
+		<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+	</div>
+</body>
+</html>
